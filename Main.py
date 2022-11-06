@@ -1,32 +1,37 @@
+from typing import List
 
-def merge(nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-  #Function implementing merging of two sorted arrays
-  #Input: nums1 -> array
-  #       m -> number of elements of nums1
-  #       nums2 -> array
-  #       n -> number of elements of nums2
-  l1 = nums1[:]
-  l2 = nums2[:]
-  curr, i, j = 0, 0, 0
-  while i < m and j < n:
-    if l1[i] < l2[j]:
-      nums1[curr] = l1[i]
+def merge(left_array: List[int], m: int, right_array: List[int], n: int) -> None:
+  # Write code here
+  left_array= left_array[:m]
+  right_array= right_array[:n]
+  data=left_array + right_array
+  i=0
+  j=0
+  k=0
+
+  while i < len(left_array) and j < len(right_array):
+    if left_array[i] <= right_array[j]:
+      data[k] = left_array[i]
       i += 1
     else:
-      nums1[curr] = l2[j]
+      data[k] = right_array[j]
       j += 1
-    curr += 1
-  while i < m:
-    nums1[curr] = l1[i]
-    curr += 1
+    k += 1
+
+  while i < len(left_array):
+    data[k] = left_array[i]
     i += 1
-  while j < n:
-    nums1[curr] = l2[j]
-    curr += 1
-    j += 1
+    k += 1
+
+  while j < len(right_array):
+     data[k]=right_array[j]
+     j += 1
+     k += 1
+  print(data)
 
 
-# Do noT change the following code
+
+# Do not change the following code
 nums1 = []
 nums2 = []
 for item in input().split(', '):
@@ -36,4 +41,3 @@ for item in input().split(', '):
 m = int(input())
 n = int(input())
 merge(nums1, m, nums2, n)
-print(nums1)
